@@ -1,0 +1,73 @@
+﻿@model List<VTask>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row project-cards">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-content" id="top-tabContent">
+                        <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+                            <div class="row">
+                                @foreach(var task in Model)
+                                {
+                                    <div class="col-xxl-4 col-lg-6">
+                                    
+                                        <div class="project-box">
+                                            <span class="badge badge-primary">@task.VTaskStatus</span>
+                                            <h6>Наименование: @task.VTaskName</h6>
+                                            <p>Тип задачи: @task.VTaskType</p>
+                                            <p>Пользователь: @task.VUser.UserName</p>
+                                            <p>Дата начала: @task.VTaskDateStart</p>
+                                            <p>Выполнить к: @task.VTaskDateEnd</p>
+                                            <p>Описание задачи: @Html.Raw(task.VTaskDescription)</p>
+                                            <p>Приоритет: @task.VTaskPriority</p>
+
+                                            &nbsp; &nbsp;
+                                            <div class="form-group">
+                                                <form asp-action="ChangeStatus" method="post">
+                                                    <input type="hidden" name="id" value="@task.VTaskID" />
+                                                    <select name="newStatus" class="form-control">
+                                                        <option value="В процессе">В процессе</option>
+                                                        <option value="Завершено">Завершено</option>
+                                                        <option value="Отменено">Отменено</option>
+                                                        <!-- Добавьте дополнительные статусы по необходимости -->
+                                                    </select>
+                                                    <button type="submit" style="margin-top: 10px;" class="btn btn-primary">Сменить статус</button>
+                                                </form>
+                                            </div>
+
+                                            &nbsp &nbsp; &nbsp;
+
+                                            @if (task.VTaskFile != null)
+                                            {
+                                                <a href="data:application/octet-stream;base64,@Convert.ToBase64String(task.VTaskFile)"
+                                                   download="@task.VTaskName.@task.VTaskFileExtension">Скачать файл</a>
+                                            }
+
+                                            &nbsp; &nbsp; &nbsp;
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                <a asp-controller="Task" asp-action="Edit" asp-route-id="@task.VTaskID">Редактировать</a>
+                                            }
+                                            &nbsp &nbsp; &nbsp;
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                <a asp-controller="Task" asp-action="Delete" asp-route-id="@task.VTaskID">Удалить</a>
+                                            }
+
+                                            
+                                        </div>
+                                    </div>
+                                    }
+                                   
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

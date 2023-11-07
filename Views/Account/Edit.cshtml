@@ -1,0 +1,96 @@
+﻿@model UserModel
+        <div class="container-fluid">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-6">
+                            <h3>Редактирование профиля</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Главная страница</a></li>
+                            <li class="breadcrumb-item">Пользователь</li>
+                            <li class="breadcrumb-item active">Редактирование профиля</li>
+                        </ol>
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- Bookmark Start-->
+                        <div class="bookmark">
+                            <ul>
+                                <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
+                                <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
+                                <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
+                                <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
+                                <li>
+                                    <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Bookmark Ends-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="edit-profile">
+                <div class="row">
+                    <div class="col-xl-8">
+                            <form asp-action="Edit" enctype="multipart/form-data">
+                                <div class="row mb-2">
+                                    <div class="profile-title">
+                                        <div class="media">
+                                            @if (Model.Banner != null)
+                                            {
+                                                <img class="img-70 rounded-circle" alt="" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photo)">
+                                            }
+                                            
+                                            <div class="media-body">
+                                                <h3 class="mb-1 f-20 txt-primary">@Model.UserName</h3>
+                                                <p class="f-12">@Model.PostUser</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Баннер</label>
+                                    <div class="input-group">
+                                        <input type="file" asp-for="Banner" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Должность</label>
+                                    <select asp-for="PostUser" class="form-control" required>
+                                        <option value="">Выберите должность...</option>
+                                        <option value="Пользователь">Пользователь</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>О вас</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"></span>
+                                        <textarea asp-for="UserAbout" class="form-control" required></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Почта</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="icon-email"></i></span>
+                                        <input asp-for="Email" class="form-control" type="email" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Фотография профиля</label>
+                                    <div class="input-group">
+                                        <input type="file" asp-for="Photo" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-footer">
+                                    <button class="btn btn-primary btn-block">Редактировать</button>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->

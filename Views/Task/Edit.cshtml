@@ -1,0 +1,104 @@
+﻿@model VTask
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+@using Microsoft.EntityFrameworkCore;
+@inject UserManager<VUser> UserManager
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <h5>Редактирование задачи</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="VTaskName">Название задачи</label>
+                            <input asp-for="VTaskName" class="form-control" />
+                            <span asp-validation-for="VTaskName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="VUserID">Назначить пользователя</label>
+                            <select asp-for="VUserID" class="form-control">
+                                <option value="">Выберите пользователя</option>
+                                @foreach (var user in await UserManager.Users.ToListAsync())
+                                {
+                                    <option value="@user.Id">@user.UserName</option>
+                                }
+                            </select>
+                            <span asp-validation-for="VUserID" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="VTaskDescription">Описание</label>
+                            <textarea asp-for="VTaskDescription" class="form-control"></textarea>
+                            <span asp-validation-for="VTaskDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="VTaskStatus">Статус</label>
+                            <select asp-for="VTaskStatus" class="form-control">
+                                <option value="В процессе">В процессе</option>
+                                <option value="Завершено">Завершено</option>
+                                <option value="Отменено">Отменено</option>
+                                <!-- Добавьте другие статусы, если необходимо -->
+                            </select>
+                            <span asp-validation-for="VTaskStatus" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="VTaskType">Тип задач</label>
+                            <select asp-for="VTaskType" class="form-control">
+                                <option value="Поручение">Поручение</option>
+                                <option value="Заявка">Заявка</option>
+                                <option value="Проектная задача">Проектная задача</option>
+                                <option value="Функциональная задача">Функциональная задача</option>
+                                <!-- Добавьте другие статусы, если необходимо -->
+                            </select>
+                            <span asp-validation-for="VTaskType" class="text-danger"></span>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label asp-for="VTaskDateStart">Дата начала</label>
+                            <input asp-for="VTaskDateStart" type="date" class="form-control" />
+                            <span asp-validation-for="VTaskDateStart" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="VTaskDateEnd">Дата окончания</label>
+                            <input asp-for="VTaskDateEnd" type="date" class="form-control" />
+                            <span asp-validation-for="VTaskDateEnd" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="VTaskPriority">Тип задач</label>
+                            <select asp-for="VTaskPriority" class="form-control">
+                                <option value="Низкий">Низкий</option>
+                                <option value="Средний">Средний</option>
+                                <option value="Высокий">Высокий</option>
+                                <option value="Критичный">Критичный</option>
+                                <!-- Добавьте другие статусы, если необходимо -->
+                            </select>
+                            <span asp-validation-for="VTaskPriority" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="FileUpdate" class="control-label">Загрузка документа/фото</label>
+                            <input type="file" id="files" asp-for="FileUpdate" />
+                            <span asp-validation-for="FileUpdate" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Редактировать</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a asp-action="Index">Назад к списку задач</a>

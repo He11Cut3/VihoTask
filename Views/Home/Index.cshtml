@@ -1,0 +1,81 @@
+﻿@model VTaskContactUs
+
+<!-- Loader starts-->
+<div class="loader-wrapper">
+    <div class="theme-loader">
+        <div class="loader-p"></div>
+    </div>
+</div>
+<!-- Loader ends-->
+<!-- page-wrapper Start       -->
+<!-- Container-fluid starts-->
+<div class="container-fluid dashboard-default-sec">
+    <div class="row">
+
+        <div class="col-sm-12 col-lg-6 col-xl-4 xl-50 col-md-12 box-col-6">
+            <div class="card height-equal">
+                    <div class="cal-desc text-center card-body">
+                        <div class="cal-date" id="currentDate">
+                            <h5></h5>
+                        </div>
+                        <h6 class="f-w-600">Сначала определитесь со своим идеалом — поставьте цель.</h6>
+                        <p>Потом запаситесь необходимыми средствами для её достижения: мудростью, деньгами, методами и материалами. И, наконец, используйте все свои средства для достижения цели.</p>
+                    </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-6 col-xl-8 xl-50 col-md-12 box-col-6">
+            <div class="card height-equal">
+                <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                    <h5>Связь с нами</h5>
+                    <div class="setting-list">
+                        <ul class="list-unstyled setting-option">
+                            <li>
+                                <div class="setting-primary"><i class="icon-settings"></i></div>
+                            </li>
+                            <li><i class="view-html fa fa-code font-primary"></i></li>
+                            <li><i class="icofont icofont-maximize full-card font-primary"></i></li>
+                            <li><i class="icofont icofont-minus minimize-card font-primary"></i></li>
+                            <li><i class="icofont icofont-refresh reload-card font-primary"></i></li>
+                            <li><i class="icofont icofont-error close-card font-primary"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="contact-form card-body">
+                    <form asp-action="CreateForm" method="post" enctype="multipart/form-data">
+                        <div class="form-icon"><i class="icofont icofont-envelope-open"></i></div>
+                        <div class="mb-3">
+                            <label for="exampleInputName">Имя отчество</label>
+                            <input asp-for="VTaskContactUsName" class="form-control" type="text" placeholder="Иван Иваныч">
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label" for="exampleInputEmail1">Почта</label>
+                            <input asp-for="VTaskContactUsEmail" class="form-control" id="exampleInputEmail1" type="email" placeholder="Demo@gmail.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label" for="exampleInputEmail1">Сообщение</label>
+                            <textarea asp-for="VTaskContactUsMessage" class="form-control textarea" rows="3" cols="50" placeholder="Ваше сообщение"></textarea>
+                        </div>
+                        <div class="text-sm-end">
+                            <button class="btn btn-primary">Отправить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Создаем объект для работы с датой
+    var currentDateElement = document.getElementById("currentDate");
+    var today = new Date();
+
+    // Получаем день и месяц
+    var day = today.getDate();
+    var month = today.toLocaleString('default', { month: 'short' });
+
+    // Устанавливаем значение в элементе
+    currentDateElement.querySelector("h5").textContent = day;
+    currentDateElement.querySelector("h5").insertAdjacentHTML("beforeend", "<br>" + month);
+</script>
+<!-- Container-fluid Ends-->

@@ -1,0 +1,24 @@
+@model IEnumerable<Chat>
+
+
+
+<ul class="list custom-scrollbar">
+    <li class="clearfix">
+        <div class="media">
+            <div class="chat-body">
+                <ul>
+                    @foreach (var chat in Model)
+                    {
+                        <li>
+                            <a class="room-button" asp-controller="Chat" asp-action="Chat" asp-route-id="@chat.Id">
+                                @chat.Name
+                            </a>
+                        </li>
+                        
+                    }
+                </ul>
+                
+            </div>
+        </div>
+    </li>
+</ul>

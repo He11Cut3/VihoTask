@@ -1,0 +1,67 @@
+﻿@model UserModel
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="user-profile">
+            <div class="row">
+                <!-- user profile header start-->
+                <div class="col-sm-12">
+                    <div class="card profile-header">
+                        <img class="img-fluid bg-img-cover" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Banner)" alt="">
+                        <div class="profile-img-wrrap"><img class="img-fluid bg-img-cover" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Banner)" alt=""></div>
+                        <div class="userpro-box">
+                            <div class="img-wrraper">
+                                <div class="avatar"><img class="img-fluid" alt="" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photo)"></div><a class="icon-wrapper" asp-controller="Account" asp-action="Edit"><i class="icofont icofont-pencil-alt-5"></i></a>
+                            </div>
+                            <div class="user-designation">
+                                <div class="title">
+                                    <a target="_blank" href="">
+                                        <h4>@Model.UserName</h4>
+                                        <h6>@Model.PostUser</h6>
+                                    </a>
+                                </div>
+                                <div class="social-media">
+                                    <ul class="user-list-social">
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- user profile header end-->
+                
+                <div class="col-xl-9 col-lg-12 col-md-7 xl-65">
+                    <div class="row">
+                        <!-- profile post start-->
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="profile-post">
+                                    <div class="post-header">
+                                        <div class="media">
+                                            <img class="img-thumbnail rounded-circle me-3" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photo)" alt="Generic placeholder image">
+                                            <div class="media-body align-self-center">
+                                                <a href="social-app.html">
+                                                    <h5 class="user-name">@Model.UserName - обо мне</h5>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="post-setting"><i class="fa fa-ellipsis-h"></i></div>
+                                    </div>
+                                    <div class="post-body">
+                                        <p>@Html.Raw(Model.UserAbout)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- profile post end-->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->

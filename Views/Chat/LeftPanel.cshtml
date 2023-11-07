@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Chat>
+
+<!-- Chat left side Start-->
+
+
+<div class="chat-left-aside">
+    <div class="media">
+        <img class="rounded-circle user-image" src="../assets/images/user/12.png" alt="">
+        <div class="media-body">
+            <div class="about">
+                <div class="name f-w-600">Mark Jecno</div>
+                <div class="status">Status...</div>
+            </div>
+        </div>
+    </div>
+    <div class="people-list" id="people-list">
+        <div class="search">
+            <form class="theme-form">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="search"><i class="fa fa-search"></i>
+                </div>
+            </form>
+        </div>
+        <ul class="list custom-scrollbar">
+            <li class="clearfix">
+                <div class="media">
+                    <div class="chat-body">
+                        @foreach (var chat in Model)
+                        {
+                            <a class="room-button" asp-controller="Chat" asp-action="JoinRoom" asp-route-id="@chat.Id">
+                                @chat.Name
+                            </a>
+                        }
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+        <vc:room></vc:room>
+    </div>
+</div>
+<!-- Chat left side Ends-->

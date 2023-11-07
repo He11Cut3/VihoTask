@@ -1,0 +1,80 @@
+﻿@model UserModel
+
+<!-- page-wrapper Start-->
+<section>
+    <div class="container-fluid p-0">
+        <div class="row m-0">
+            <div class="col-12 p-0">
+                <div class="login-card">
+                    <form asp-action="Create" class="theme-form login-form" enctype="multipart/form-data">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <h4>Создание аккаунта</h4>
+                        <h6>Enter your personal details to create account</h6>
+                        <div class="form-group">
+                            <label>Никнейм</label>
+                            <div class="small-group">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="icon-user"></i></span>
+                                    <input asp-for="UserName" class="form-control" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Баннер</label>
+                            <div class="input-group">
+                                <input type="file" asp-for="Banner" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Должность</label>
+                            <select asp-for="PostUser" class="form-control" required>
+                                <option value="">Выберите должность...</option>
+                                <option value="Пользователь">Пользователь</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>О вас</label>
+                            <div class="input-group">
+                                <span class="input-group-text"></span>
+                                <textarea asp-for="UserAbout" class="form-control" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Почта</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="icon-email"></i></span>
+                                <input asp-for="Email" class="form-control" type="email" required />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Пароль</label>
+                            <div class="input-group">
+                                <input asp-for="Password" class="form-control" type="password" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Фотография профиля</label>
+                            <div class="input-group">
+                                <input type="file" asp-for="Photo" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <input id="checkbox1" type="checkbox" required>
+                                <label class="text-muted" for="checkbox1">Вы согласны с <span>Политикой безопасности? </span></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" type="submit">Создать аккаунт</button>
+                        </div>
+                        <p>Есть аккаунта?<a class="ms-2" asp-controller="Account" asp-action="Login">Вход</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

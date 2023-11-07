@@ -1,0 +1,105 @@
+<div class="col call-chat-body">
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="row chat-box">
+                <div class="col chat-right-aside">
+                    <div class="chat">
+                        <!-- chat-header start-->
+                        <!-- chat-header end-->
+                        
+                        <div class="chat-history chat-msg-box custom-scrollbar ">
+                                <div class="chat-body">
+                                @foreach (var message in Model.Messages)
+                                {
+                                    <div class="message">
+                                        <header>@message.Name:</header>
+                                        <p>@message.Text</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <form class="chat-input" onsubmit="sendMessage(event)" asp-controller="Chat" asp-action="CreateMessage">
+                        <div class="chat-message clearfix">
+                            <div class="row">
+                
+                                <div class="col-xl-12 d-flex">
+                                    <div class="smiley-box bg-primary">
+                                        <div class="picker"><img src="../assets/images/smiley.png" alt=""></div>
+                                    </div>
+                                    <div class="input-group text-box">
+                                            <input type="hidden" name="roomId" value="@Model.Id">
+                                            <input class="form-control input-txt-bx" type="text" name="message" id="message-input">
+                                            <button class="btn btn-primary input-group-text" type="submit">Send</button>
+                                    </div>
+                                </div>
+                
+                            </div>
+                        </div>
+                        </form>
+                        <!-- end chat-message-->
+                        <!-- chat end-->
+                        <!-- Chat right side ends-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/js/signalr.min.js"></script>
+    <script src="~/js/messageBuilder.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
+
+        var _connectionId = '';
+
+        connection.on("RecieveMessage", function (data) {
+            var message = messageBuilder()
+                .createMessage()
+                .withHeader(data.name)
+                .withParagraph(data.text)
+                .build();
+
+            var chatBody = document.querySelector('.chat-body');
+            chatBody.append(message);
+
+            // Прокрутка вниз
+            chatBody.scrollTop = chatBody.scrollHeight;
+        })
+
+        connection.start()
+            .then(function () {
+                connection.invoke('joinRoom', '@Model.Id');
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+
+        window.addEventListener('onunload', function () {
+            connection.invoke('leaveRoom', '@Model.Id');
+        })
+
+        var sendMessage = function (event) {
+            event.preventDefault();
+
+            var data = new FormData(event.target);
+            document.getElementById('message-input').value = '';
+            axios.post('/Chat/SendMessage', data)
+                .then(res => {
+                    console.log("Message Sent!");
+
+                    // Прокрутка вниз после отправки сообщения
+                    var chatBody = document.querySelector('.chat-history');
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                })
+                .catch(err => {
+                    console.log("Failed to send message!");
+                });
+        }
+
+    </script>
+}

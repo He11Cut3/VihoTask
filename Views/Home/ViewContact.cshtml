@@ -1,0 +1,50 @@
+﻿@model List<VTaskContactUs>
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Base styles-->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Обратная связь </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="display" id="example-style-1">
+                            <thead>
+                                <tr>
+                                    <th>&nbsp; Имя &nbsp;</th>
+                                    <th>&nbsp; Почта &nbsp;</th>
+                                    <th>&nbsp; Обращение &nbsp;</th>
+                                </tr>
+                            </thead>
+                                @foreach(var cont in Model)
+                                {
+                                    <tbody>
+                                        <tr>
+
+                                        <td>&nbsp; @cont.VTaskContactUsName &nbsp;</td>
+                                        <td>&nbsp; @cont.VTaskContactUsEmail &nbsp;</td>
+                                        <td>&nbsp; @cont.VTaskContactUsMessage &nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                }
+                                
+                           
+                            <tfoot>
+                                <tr>
+                                    <th>&nbsp; Имя &nbsp;</th>
+                                    <th>&nbsp; Почта &nbsp;</th>
+                                    <th>&nbsp; Обращение &nbsp;</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Base styles Ends-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->

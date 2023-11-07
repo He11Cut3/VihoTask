@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    @await Html.PartialAsync("CSSPartial")
+
+    @await Html.PartialAsync("MetaTagPartial")
+
+</head>
+
+<body>
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        @await Html.PartialAsync("HeaderPartial")
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="page-wrapper compact-wrapper" id="pageWrapper">
+
+            <!-- Page Body Start-->
+            <div class="page-body-wrapper sidebar-icon">
+                <div class="page-body">
+
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        @RenderBody()
+    }
+
+
+
+    @await Html.PartialAsync("ScriptPartial")
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

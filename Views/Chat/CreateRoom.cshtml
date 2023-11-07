@@ -1,0 +1,24 @@
+﻿<!-- Container-fluid starts-->
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-header pb-0">
+                    <h5>Создание комнаты</h5>
+                  </div>
+                  <div class="card-body">
+                    <form asp-controller="Chat" asp-action="CreateRoom" class="modal-body">
+                      <div class="row g-3">
+                        <div class="col-md-4">
+                          <label class="form-label" for="validationCustom01">Наименование комнаты</label>
+                                <input class="form-control" name="name" required>
+                        </div>
+                      </div>
+                      <button class="btn btn-primary" type="submit">Создать</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Container-fluid Ends-->
