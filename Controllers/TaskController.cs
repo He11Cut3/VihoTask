@@ -98,6 +98,8 @@ namespace VihoTask.Controllers
         {
             return View();
         }
+
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -109,11 +111,13 @@ namespace VihoTask.Controllers
                 {
                     await task.FileUpdate.CopyToAsync(memoryStream);
                     task.VTaskFile = memoryStream.ToArray();
-                    // Определяем формат файла и сохраняем его
                     var fileInfo = new FileInfo(task.FileUpdate.FileName);
                     task.VTaskFileExtension = fileInfo.Extension.TrimStart('.');
                 }
+            }
 
+            if (!string.IsNullOrEmpty(task.VUserID))
+            {
                 var selectedUser = await _userManager.FindByIdAsync(task.VUserID);
 
                 if (selectedUser != null)
@@ -123,13 +127,25 @@ namespace VihoTask.Controllers
                 else
                 {
                     ModelState.AddModelError("VUserID", "Выберите существующего пользователя.");
+                    return View(task); // Return the view with the current task model to show validation errors
                 }
             }
+            else
+            {
+                ModelState.AddModelError("VUserID", "Необходимо указать пользователя.");
+                return View(task); // Return the view with the current task model to show validation errors
+            }
 
-            _context.VTasks.Add(task);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _context.VTasks.Add(task);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return View(task); // Return the view with the current task model to show validation errors
         }
+
 
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(long id)

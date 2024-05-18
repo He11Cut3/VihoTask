@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VihoTask")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef24326097cfad433f71d437ceabda49d2c84fef")]
 [assembly: System.Reflection.AssemblyProductAttribute("VihoTask")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VihoTask")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

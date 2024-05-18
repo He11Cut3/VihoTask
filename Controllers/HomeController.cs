@@ -82,6 +82,7 @@ namespace VihoTask.Controllers
                     {
                         UserName = user.UserName,
                         Email = user.Email,
+                       
                         PostUser = user.VUserPost,
                         UserAbout = user.VUserAbout,
                         Photo = user.VUserPhoto,

@@ -16,11 +16,12 @@
                                             <span class="badge badge-primary">@task.VTaskStatus</span>
                                             <h6>Наименование: @task.VTaskName</h6>
                                             <p>Тип задачи: @task.VTaskType</p>
-                                            <p>Пользователь: @task.VUser.UserName</p>
+                                            <p>Пользователь: @(task.VUser != null ? task.VUser.UserName : "Пользователь не назначен")</p>
                                             <p>Дата начала: @task.VTaskDateStart</p>
                                             <p>Выполнить к: @task.VTaskDateEnd</p>
                                             <p>Описание задачи: @Html.Raw(task.VTaskDescription)</p>
                                             <p>Приоритет: @task.VTaskPriority</p>
+                                            <p>Статус: @task.VTaskStatus</p>
 
                                             &nbsp; &nbsp;
                                             <div class="form-group">
